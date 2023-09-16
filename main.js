@@ -12,7 +12,7 @@ const gameScore = document.querySelector('.game__score');
 
 const popUp = document.querySelector('.pop-up');
 const popUpText = document.querySelector('.pop-up__message');
-const popUpRefresh = document.querySelector('.pop-up__refresh')
+const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const bugSound = new Audio('./sound/bug_pull.mp3');
