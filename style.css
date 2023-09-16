@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    background-color: black;
 }
 
 button {
@@ -46,17 +47,21 @@ button {
     margin-top: 8px;
     border-radius: 20px;
     visibility: hidden;
+    user-select: none;
+    cursor: auto;
 }
 .game__score {
     width: 50px;
     height: 50;
-    font-size: 46px;
+    font-size: 38px;
     border: 3px solid black;
     background-color: darksalmon;
     color: white;
     border-radius: 50%;
     margin-top: 8px;
     visibility: hidden;
+    user-select: none;
+    cursor: auto;
 
 }
 .game__field{
@@ -97,4 +102,13 @@ button {
     display: block;
     font-size: 38px;
     margin-top: 20px;
+}
+
+.carrot, .bug {
+    transition: transform 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover {
+    transform: scale(1.1);
 }
