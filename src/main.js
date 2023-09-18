@@ -1,5 +1,7 @@
 'use strict';
 
+import PopUp from './popUp.js'
+
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 10;
 const BUG_COUNT = 10;
@@ -9,10 +11,6 @@ const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
 const gameScore = document.querySelector('.game__score');
-
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
-const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const bugSound = new Audio('./sound/bug_pull.mp3');
@@ -27,6 +25,13 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+    startGame();
+})
+
+
+
 field.addEventListener('click', onFieldClick);
 
 gameBtn.addEventListener('click', () => {
@@ -37,11 +42,6 @@ gameBtn.addEventListener('click', () => {
         startGame();
     }
 });
-
-popUpRefresh.addEventListener('click', () => {
-    startGame();
-    hidePopUp();
-})
 
 
 
@@ -85,7 +85,7 @@ function finishGame(win) {
     } else {
         palySound(bugSound);
     }
-    showPopUpWithText(win ? 'YOU WON 🎉' : 'YOU LOST');
+    gameFinishBanner.showWithText(win ? 'YOU WON 🎉' : 'YOU LOST');
 }
 
 function updateScoreBoard() {
@@ -99,13 +99,15 @@ function startGame() {
     showStopBtn();
     showTimerAndScore();
     startGameTimer();
+
+
 }
 
 function stopGame() {
     started = false;
     stopGameTimer();
     hideGameBtn();
-    showPopUpWithText('REPLAY?');
+    gameFinishBanner.showWithText('REPLAY?');
     palySound(alertSound);
     stopSound(bgSound);
 }
@@ -149,15 +151,6 @@ function hideGameBtn() {
     gameBtn.style.visibility = 'hidden';
 }
 
-function showPopUpWithText(text) {
-    popUp.classList.remove('pop-up--hide');
-    popUpText.innerText = text;
-}
-
-function hidePopUp() {
-    popUp.classList.add('pop-up--hide');
-
-}
 
 function initGame() {
     score = 0;
