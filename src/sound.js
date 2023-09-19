@@ -21,8 +21,9 @@ export function playAlert() {
     palySound(alertSound)
 }
 export function playWin() {
-    palySound(carrotSound)
+    palySound(winSound)
 }
+
 
 export function stopBg() {
     stopSound(bgSound)

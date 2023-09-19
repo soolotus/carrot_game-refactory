@@ -1,6 +1,6 @@
 'use strict'
 
-import Field from './field.js';
+import { Field, ItemType } from './field.js';
 import * as sound from './sound.js';
 
 export const Reason = Object.freeze({
@@ -70,12 +70,17 @@ class Game {
         sound.playBg()
     }
 
-    stop() {
+    stop(reason) {
         this.started = false;
         this.stopGameTimer();
         this.hideGameBtn();
         sound.playAlert();
         sound.stopBg();
+        if (reason === Reason.win) {
+            sound.playWin();
+        } else if (reason === Reason.lose) {
+            sound.playBug();
+        }
         this.onGameStop && this.onGameStop(Reason.cancel);
     }
 
