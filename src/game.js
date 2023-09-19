@@ -1,12 +1,34 @@
 'use strict'
 
 import Field from './field.js';
-
 import * as sound from './sound.js';
 
+// Builder Pattern 
+export default class GameBuilder {
+    withGameDuration(duration) {
+        this.gameDuration = duration;
+        return this;
+    }
+    withCarrotCount(num) {
+        this.carrotCount = num;
+        return this;
+    }
+    withBugCount(num) {
+        this.bugCount = num;
+        return this;
+    }
 
+    build() {
+        return new Game(
+            this.gameDuration,//
+            this.carrotCount,//
+            this.bugCount
+        )
+    }
 
-export default class Game {
+}
+
+class Game {
     constructor(gameDuration, carrotCount, bugCount) {
         this.gameDuration = gameDuration;
         this.carrotCount = carrotCount;
